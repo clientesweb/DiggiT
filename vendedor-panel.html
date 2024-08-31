@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panel del Vendedor</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Mulish:wght@400;600&display=swap">
+    <style>
+        /* Estilos generales para el cuerpo */
+        body {
+            font-family: 'Mulish', sans-serif;
+            background-color: #761c9e;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+            box-sizing: border-box;
+        }
+
+        /* Estilo del encabezado */
+        header {
+            background-color: #9b51e0;
+            color: #ffffff;
+            text-align: center;
+            padding: 20px;
+            width: 100%;
+            box-sizing: border-box;
+            position: relative;
+            margin-bottom: 20px;
+        }
+
+        header img {
+            width: 150px;
+            margin-bottom: 10px;
+        }
+
+        header h1 {
+            font-size: 24px;
+            margin: 0;
+        }
+
+        button {
+            background-color: #761c9e;
+            color: white;
+            border: none;
+            padding: 10px;
+            border-radius: 4px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #5a1374;
+        }
+
+        #cerrar-sesion {
+            position: absolute;
+            right: 20px;
+            top: 20px;
+        }
+
+        /* Estilo del contenedor principal */
+        .container {
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 800px;
+            box-sizing: border-box;
+        }
+
+        /* Estilo del panel de ventas y carga de venta */
+        #ventas-panel,
+        #cargar-venta {
+            margin-bottom: 20px;
+        }
+
+        #ventas-panel table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 10px;
+        }
+
+        #ventas-panel th,
+        #ventas-panel td {
+            padding: 10px;
+            border: 1px solid #ddd;
+            text-align: left;
+        }
+
+        #ventas-panel th {
+            background-color: #f4f4f4;
+        }
+
+        #cargar-venta label {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        #cargar-venta input,
+        #cargar-venta select {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+
+        #agregar-venta {
+            background-color: #761c9e;
+            color: white;
+            border: none;
+            padding: 10px;
+            border-radius: 4px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        #agregar-venta:hover {
+            background-color: #5a1374;
+        }
+
+        #mensaje-error {
+            color: red;
+            font-size: 14px;
+            margin-top: -10px;
+            margin-bottom: 15px;
+        }
+
+        /* Estilo del footer */
+        footer {
+            background-color: #333;
+            color: #fff;
+            text-align: center;
+            padding: 10px;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        footer p {
+            margin: 0;
+            font-size: 14px;
+        }
+
+        /* Media Queries para hacer la página responsiva */
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 20px;
+            }
+
+            button {
+                font-size: 14px;
+            }
+
+            .container {
+                padding: 15px;
+            }
+
+            #ventas-panel table {
+                font-size: 14px;
+            }
+
+            #cargar-venta input,
+            #cargar-venta select {
+                font-size: 14px;
+            }
+
+            footer {
+                padding: 8px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <img src="images/logo.png" alt="Logo">
+        <h1>Panel del Vendedor</h1>
+        <button id="cerrar-sesion" aria-label="Cerrar sesion"><i class="fas fa-sign-out-alt"></i> Cerrar Sesion</button>
+    </header>
+    <div class="container">
+        <h2>Mis Ventas</h2>
+        <div id="ventas-panel">
+            <h3></h3>
+            <table id="tabla-ventas">
+                <thead>
+                    <tr>
+                        <th>Perfil</th>
+                        <th>ID Transaccion</th>
+                        <th>Monto</th>
+                        <th>Entregado</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Las ventas del vendedor se añadirán aquí -->
+                </tbody>
+            </table>
+            <h4>Total de Ventas: $<span id="total-ventas">0.00</span></h4>
+        </div>
+        <div id="cargar-venta">
+            <h3>Cargar Nueva Venta</h3>
+            <label for="perfil">Perfil:</label>
+            <input type="text" id="perfil" required aria-label="Perfil"><br>
+            <label for="numero-confirmacion">ID Transaccion:</label>
+            <input type="text" id="numero-confirmacion" required aria-label="ID Transacción"><br>
+            <label for="monto">Monto:</label>
+            <input type="number" id="monto" step="0.01" required aria-label="Monto"><br>
+            <label for="entregado">Entregado:</label>
+            <select id="entregado" aria-label="Entregado">
+                <option value="si">Si</option>
+                <option value="no">No</option>
+            </select><br>
+            <button id="agregar-venta">Agregar Venta</button>
+            <p id="mensaje-error"></p>
+        </div>
+    </div>
+    <footer>
+        <p>Powered by Duality Domain</p>
+    </footer>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/js/all.min.js"></script>
+    <script src="js/vendedor-panel.js"></script>
+</body>
+</html>

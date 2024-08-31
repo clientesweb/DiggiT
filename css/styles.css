@@ -1,0 +1,133 @@
+/* Estilos generales para el cuerpo */
+body {
+    font-family: 'Mulish', sans-serif;
+    background-color: #9b51e0;
+    margin: 0;
+    padding: 0;
+}
+
+/* Estilo del encabezado */
+header {
+    background-color: #761c9e;
+    color: #fff;
+    padding: 20px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+header img {
+    width: 200px;
+    margin-bottom: 10px;
+}
+
+header h1 {
+    margin: 10px 0;
+}
+
+#cerrar-sesion {
+    background-color: #dc3545;
+    border: none;
+    color: #fff;
+    padding: 10px 15px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+}
+
+#cerrar-sesion i {
+    margin-right: 5px;
+}
+
+#cerrar-sesion:hover {
+    background-color: #c82333;
+}
+
+/* Estilo del contenedor principal */
+.container {
+    padding: 20px;
+    max-width: 900px;
+    margin: 20px auto;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Estilo para los títulos */
+h2, h3, h4 {
+    color: #333;
+    margin: 10px 0;
+}
+
+/* Estilo para las tablas */
+#ventas-panel table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+}
+
+#ventas-panel th, #ventas-panel td {
+    border: 1px solid #ddd;
+    padding: 10px;
+    text-align: left;
+}
+
+#ventas-panel th {
+    background-color: #f8f9fa;
+    color: #333;
+}
+
+#ventas-panel tbody tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+#ventas-panel tbody tr:hover {
+    background-color: #f1f1f1;
+}
+
+/* Estilo para el formulario de carga de venta */
+#cargar-venta {
+    margin-top: 20px;
+}
+
+#cargar-venta label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: #666;
+}
+
+#cargar-venta input, #cargar-venta select {
+    width: calc(100% - 22px);
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 16px;
+}
+
+#agregar-venta {
+    background-color: #28a745;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 4px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+#agregar-venta:hover {
+    background-color: #218838;
+}
+
+#mensaje-error {
+    color: red;
+    font-size: 14px;
+    margin-top: -10px;
+    margin-bottom: 15px;
+}

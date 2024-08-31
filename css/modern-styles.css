@@ -1,0 +1,163 @@
+/* Estilos generales para el cuerpo */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f7f9fc;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+}
+
+/* Estilo del encabezado */
+header {
+    background-color: #007bff;
+    color: white;
+    width: 100%;
+    padding: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    position: sticky;
+    top: 0;
+}
+
+header .logo {
+    width: 60px;
+}
+
+header h1 {
+    margin: 0;
+    font-size: 24px;
+    flex-grow: 1;
+    text-align: center;
+}
+
+header .btn {
+    background-color: #343a40;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+header .btn:hover {
+    background-color: #495057;
+}
+
+/* Estilo del contenedor principal */
+.container {
+    width: 90%;
+    max-width: 1200px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+h2 {
+    color: #333;
+    font-size: 22px;
+    margin-bottom: 20px;
+}
+
+.links {
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 20px;
+}
+
+.links .btn {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-size: 16px;
+    text-decoration: none;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    transition: background-color 0.3s;
+}
+
+.links .btn i {
+    margin-right: 8px;
+}
+
+.links .btn:hover {
+    background-color: #0056b3;
+}
+
+/* Estilo de la tabla de ventas */
+#ventas-panel {
+    margin-bottom: 40px;
+}
+
+#tabla-ventas {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+}
+
+#tabla-ventas th,
+#tabla-ventas td {
+    border: 1px solid #ddd;
+    padding: 10px;
+    text-align: left;
+}
+
+#tabla-ventas th {
+    background-color: #007bff;
+    color: white;
+}
+
+#tabla-ventas tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+#tabla-ventas tr:hover {
+    background-color: #ddd;
+}
+
+#ventas-panel h3 {
+    margin-top: 20px;
+    font-size: 18px;
+}
+
+#limpiar-datos {
+    background-color: #dc3545;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+#limpiar-datos:hover {
+    background-color: #c82333;
+}
+
+/* Estilo para los gráficos */
+#grafico-ventas {
+    display: flex;
+    flex-direction: column;
+}
+
+#grafico-ventas div {
+    margin-bottom: 40px;
+}
+
+canvas {
+    width: 100% !important;
+    max-width: 600px;
+    height: auto !important;
+}
