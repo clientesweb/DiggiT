@@ -6,7 +6,7 @@ document.addEventListener('DOMContentLoaded', () => {
         return;
     }
     
-    // Mostrar el nombre del usuario y el avatar
+    // Mostrar nombre del usuario y avatar
     function mostrarUsuario() {
         const nombreUsuario = localStorage.getItem('nombreUsuario') || 'Usuario';
         document.getElementById('nombre-usuario').textContent = nombreUsuario;
