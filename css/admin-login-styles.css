@@ -19,7 +19,7 @@ body {
     margin-top: 20px;
 }
 
-.login-form label {
+.login-container label {
     display: block;
     text-align: left;
     margin: 15px 0 5px;
@@ -27,7 +27,7 @@ body {
     color: #333;
 }
 
-.login-form input {
+.login-container input {
     width: 100%;
     padding: 10px;
     margin-bottom: 15px;
@@ -36,7 +36,7 @@ body {
     font-size: 1em;
 }
 
-.login-form button {
+.login-container button {
     width: 100%;
     padding: 10px;
     background-color: #007bff;
@@ -48,7 +48,7 @@ body {
     transition: background-color 0.3s;
 }
 
-.login-form button:hover {
+.login-container button:hover {
     background-color: #0056b3;
 }
 
@@ -65,4 +65,4 @@ footer {
     bottom: 0;
     background-color: #fff;
     box-shadow: 0 -1px 5px rgba(0, 0, 0, 0.1);
-} 
+}
