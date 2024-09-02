@@ -20,7 +20,7 @@ document.addEventListener('DOMContentLoaded', () => {
         // Ejemplo básico de autenticación
         if (usuario === 'admin' && contrasena === 'admin123') {
             console.log('Autenticación exitosa');
-            window.location.href = 'admin.html'; // Asegúrate de que la ruta sea correcta
+            window.location.href = '/admin.html'; // Asegúrate de que la ruta sea correcta
         } else {
             mensajeError.textContent = 'Usuario o contraseña incorrectos.';
             console.log('Autenticación fallida');
