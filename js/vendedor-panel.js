@@ -1,16 +1,9 @@
 document.addEventListener('DOMContentLoaded', () => {
     const usuarioAutenticado = localStorage.getItem('vendedorAutenticado');
-
+    
     if (!usuarioAutenticado) {
         window.location.href = 'login.html'; // Redirigir a la página de inicio de sesión si no está autenticado
         return;
-    }
-
-    // Establecer el nombre del usuario
-    document.getElementById('nombre-usuario').textContent = usuarioAutenticado;
-
-    // Resto del código...
-});
     }
     
     // Función para mostrar las ventas del vendedor
@@ -73,4 +66,4 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Mostrar ventas al cargar la página
     mostrarVentas();
-})
+});
