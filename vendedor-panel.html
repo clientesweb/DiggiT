@@ -65,11 +65,10 @@
             margin-bottom: 20px;
         }
 
-        .user-info img {
-            border-radius: 50%;
-            width: 50px;
-            height: 50px;
+        .user-info i {
+            font-size: 50px;
             margin-right: 10px;
+            color: #9b51e0;
         }
 
         .user-info h2 {
@@ -169,6 +168,43 @@
             background-color: #f44336;
         }
 
+        /* Estilo para el filtro y paginación */
+        #filtro-ventas {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+
+        .pagination {
+            display: flex;
+            justify-content: center;
+            margin-top: 10px;
+        }
+
+        .pagination button {
+            background-color: #761c9e;
+            color: white;
+            border: none;
+            padding: 10px;
+            border-radius: 4px;
+            font-size: 16px;
+            cursor: pointer;
+            margin: 0 5px;
+            transition: background-color 0.3s ease;
+        }
+
+        .pagination button:hover {
+            background-color: #5a1374;
+        }
+
+        .pagination .disabled {
+            background-color: #ddd;
+            cursor: not-allowed;
+        }
+
         /* Media Queries para hacer la página responsiva */
         @media (max-width: 768px) {
             header h1 {
@@ -206,8 +242,8 @@
     </header>
     <div class="container">
         <div class="user-info">
-            <img src="images/user-avatar.png" alt="Avatar">
-            <h2>Nombre del Usuario</h2>
+            <i class="fas fa-user-circle"></i>
+            <h2 id="nombre-usuario">Nombre del Usuario</h2>
         </div>
         <div id="notificacion" class="notificacion"></div>
         <h2>Mis Ventas</h2>
@@ -228,6 +264,10 @@
                 </tbody>
             </table>
             <h4>Total de Ventas: $<span id="total-ventas">0.00</span></h4>
+            <div class="pagination">
+                <button id="pagina-anterior" class="disabled"><i class="fas fa-chevron-left"></i> Anterior</button>
+                <button id="pagina-siguiente"><i class="fas fa-chevron-right"></i> Siguiente</button>
+            </div>
         </div>
         <div id="cargar-venta">
             <h3>Cargar Nueva Venta</h3>
@@ -249,29 +289,4 @@
     <footer>
         <p>Powered by Duality Domain</p>
     </footer>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/js/all.min.js"></script>
-    <script src="js/vendedor-panel.js"></script>
-    <script>
-        // Script para las notificaciones
-        function mostrarNotificacion(mensaje, tipo = 'success') {
-            const notificacion = document.getElementById('notificacion');
-            notificacion.className = `notificacion ${tipo}`;
-            notificacion.textContent = mensaje;
-            notificacion.style.display = 'block';
-            setTimeout(() => {
-                notificacion.style.display = 'none';
-            }, 3000);
-        }
-
-        // Script para el filtro de ventas
-        document.getElementById('filtro-ventas').addEventListener('input', function() {
-            const filtro = this.value.toLowerCase();
-            const filas = document.querySelectorAll('#tabla-ventas tbody tr');
-            filas.forEach(fila => {
-                const texto = fila.textContent.toLowerCase();
-                fila.style.display = texto.includes(filtro) ? '' : 'none';
-            });
-        });
-    </script>
-</body>
-</html>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6
