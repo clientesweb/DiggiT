@@ -5,12 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Panel del Vendedor</title>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Mulish:wght@400;600&display=swap">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
         /* Estilos generales para el cuerpo */
         body {
             font-family: 'Mulish', sans-serif;
-            background-color: #761c9e;
+            background-color: #f0f0f0;
             margin: 0;
             padding: 0;
             display: flex;
@@ -42,24 +42,6 @@
             margin: 0;
         }
 
-        button {
-            background-color: #761c9e;
-            color: white;
-            border: none;
-            padding: 10px;
-            border-radius: 4px;
-            font-size: 16px;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
-            display: flex;
-            align-items: center;
-            gap: 5px;
-        }
-
-        button:hover {
-            background-color: #5a1374;
-        }
-
         #cerrar-sesion {
             position: absolute;
             right: 20px;
@@ -75,6 +57,24 @@
             width: 100%;
             max-width: 800px;
             box-sizing: border-box;
+        }
+
+        .user-info {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .user-info img {
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            margin-right: 10px;
+        }
+
+        .user-info h2 {
+            margin: 0;
+            font-size: 20px;
         }
 
         /* Estilo del panel de ventas y carga de venta */
@@ -145,12 +145,28 @@
             padding: 10px;
             width: 100%;
             box-sizing: border-box;
-            margin-top: auto;
         }
 
         footer p {
             margin: 0;
             font-size: 14px;
+        }
+
+        /* Estilos para la notificación */
+        .notificacion {
+            display: none;
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background-color: #4caf50;
+            color: white;
+            padding: 10px;
+            border-radius: 4px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        .notificacion.error {
+            background-color: #f44336;
         }
 
         /* Media Queries para hacer la página responsiva */
@@ -186,17 +202,23 @@
     <header>
         <img src="images/logo.png" alt="Logo">
         <h1>Panel del Vendedor</h1>
-        <button id="cerrar-sesion" aria-label="Cerrar sesion"><i class="fas fa-sign-out-alt"></i> Cerrar Sesión</button>
+        <button id="cerrar-sesion" aria-label="Cerrar sesión"><i class="fas fa-sign-out-alt"></i> Cerrar Sesión</button>
     </header>
     <div class="container">
+        <div class="user-info">
+            <img src="images/user-avatar.png" alt="Avatar">
+            <h2>Nombre del Usuario</h2>
+        </div>
+        <div id="notificacion" class="notificacion"></div>
         <h2>Mis Ventas</h2>
+        <input type="text" id="filtro-ventas" placeholder="Buscar ventas...">
         <div id="ventas-panel">
-            <h3></h3>
+            <h3>Ventas del Mes</h3>
             <table id="tabla-ventas">
                 <thead>
                     <tr>
                         <th>Perfil</th>
-                        <th>ID Transaccion</th>
+                        <th>ID Transacción</th>
                         <th>Monto</th>
                         <th>Entregado</th>
                     </tr>
@@ -227,7 +249,29 @@
     <footer>
         <p>Powered by Duality Domain</p>
     </footer>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/js/all.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/js/all.min.js"></script>
     <script src="js/vendedor-panel.js"></script>
+    <script>
+        // Script para las notificaciones
+        function mostrarNotificacion(mensaje, tipo = 'success') {
+            const notificacion = document.getElementById('notificacion');
+            notificacion.className = `notificacion ${tipo}`;
+            notificacion.textContent = mensaje;
+            notificacion.style.display = 'block';
+            setTimeout(() => {
+                notificacion.style.display = 'none';
+            }, 3000);
+        }
+
+        // Script para el filtro de ventas
+        document.getElementById('filtro-ventas').addEventListener('input', function() {
+            const filtro = this.value.toLowerCase();
+            const filas = document.querySelectorAll('#tabla-ventas tbody tr');
+            filas.forEach(fila => {
+                const texto = fila.textContent.toLowerCase();
+                fila.style.display = texto.includes(filtro) ? '' : 'none';
+            });
+        });
+    </script>
 </body>
 </html>
