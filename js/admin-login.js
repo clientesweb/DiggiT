@@ -3,8 +3,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const mensajeError = document.getElementById('mensaje-error-admin');
     
     botonIniciarSesion.addEventListener('click', () => {
-        const usuario = 'admin' document.getElementById('usuario-admin').value.trim();
-        const contrasena = 'admin123' document.getElementById('contrasena-admin').value.trim();
+        const usuario = document.getElementById('usuario-admin').value.trim();
+        const contrasena = document.getElementById('contrasena-admin').value.trim();
 
         if (!usuario || !contrasena) {
             mensajeError.textContent = 'Por favor, complete todos los campos.';
