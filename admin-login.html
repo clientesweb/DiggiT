@@ -13,14 +13,16 @@
         <img src="images/logo.png" alt="Logo">
         <h1>Panel de Administración</h1>
     </header>
-    <div class="container">
-        <h2>Admin Login</h2>
-        <label for="usuario-admin"><i class="fas fa-user"></i> Usuario:</label>
-        <input type="text" id="usuario-admin" placeholder="Usuario" required>
-        <label for="contrasena-admin"><i class="fas fa-lock"></i> Contraseña:</label>
-        <input type="password" id="contrasena-admin" placeholder="Contraseña" required>
-        <button id="iniciar-sesion-admin">Iniciar Sesión</button>
-        <p id="mensaje-error-admin"></p>
+    <div class="login-container">
+        <div class="login-form">
+            <h2>Admin Login</h2>
+            <label for="usuario-admin"><i class="fas fa-user"></i> Usuario:</label>
+            <input type="text" id="usuario-admin" placeholder="Usuario" required>
+            <label for="contrasena-admin"><i class="fas fa-lock"></i> Contraseña:</label>
+            <input type="password" id="contrasena-admin" placeholder="Contraseña" required>
+            <button id="iniciar-sesion-admin">Iniciar Sesión</button>
+            <p id="mensaje-error-admin" class="error-message"></p>
+        </div>
     </div>
     <footer>
         <p>Powered by Duality Domain</p>
