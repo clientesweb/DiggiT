@@ -66,4 +66,4 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Mostrar ventas al cargar la página
     mostrarVentas();
-});
+})
