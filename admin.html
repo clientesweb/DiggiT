@@ -7,336 +7,373 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Mulish:wght@400;600&display=swap">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <meta name="description" content="Panel de administración para la gestión de ventas y usuarios.">
+    <meta property="og:title" content="Panel de Administración">
+    <meta property="og:description" content="Gestiona tus ventas y usuarios de manera eficiente.">
+    <meta property="og:image" content="url-a-la-imagen.jpg">
     <style>
+        :root {
+            --primary-color: #9b51e0;
+            --secondary-color: #5a1374;
+            --background-color: #ffffff;
+            --text-color: #333;
+            --header-bg-color: #761c9e;
+        }
+
         /* General */
-body {
-    font-family: 'Mulish', sans-serif;
-    background-color: #761c9e;
-    margin: 0;
-    padding: 0;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    min-height: 100vh;
-    box-sizing: border-box;
-}
+        body {
+            font-family: 'Mulish', sans-serif;
+            background-color: var(--header-bg-color);
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+            box-sizing: border-box;
+        }
 
-/* Header */
-header {
-    background-color: #9b51e0;
-    color: white;
-    width: 100%;
-    padding: 15px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    position: sticky;
-    top: 0;
-    box-sizing: border-box;
-    z-index: 1000; /* Asegura que el header esté siempre visible sobre otros elementos */
-}
+        /* Header */
+        header {
+            background-color: var(--primary-color);
+            color: white;
+            width: 100%;
+            padding: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            box-sizing: border-box;
+            z-index: 1000;
+        }
 
-header .logo {
-    width: 150px;
-}
+        header .logo {
+            width: 150px;
+        }
 
-header h1 {
-    margin: 0;
-    font-size: 24px;
-    flex-grow: 1;
-    text-align: center;
-}
+        header h1 {
+            margin: 0;
+            font-size: 1.5rem;
+            flex-grow: 1;
+            text-align: center;
+        }
 
-header .btn {
-    background-color: #9b51e0;
-    color: white;
-    border: none;
-    padding: 10px 15px;
-    border-radius: 5px;
-    font-size: 16px;
-    cursor: pointer;
-    transition: background-color 0.3s;
-}
+        header .btn {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
 
-header .btn:hover {
-    background-color: #5a1374;
-}
+        header .btn:hover {
+            background-color: var(--secondary-color);
+        }
 
-/* Contenedor Principal */
-.container {
-    width: 90%;
-    max-width: 1200px;
-    margin: 20px auto;
-    padding: 20px;
-    background-color: #ffffff;
-    border-radius: 8px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    box-sizing: border-box;
-}
+        /* Contenedor Principal */
+        main {
+            width: 90%;
+            max-width: 1200px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: var(--background-color);
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            box-sizing: border-box;
+        }
 
-h2 {
-    color: #333;
-    font-size: 22px;
-    margin-bottom: 20px;
-}
+        h2 {
+            color: var(--text-color);
+            font-size: 1.375rem;
+            margin-bottom: 20px;
+        }
 
-.links {
-    display: flex;
-    justify-content: space-around;
-    margin-bottom: 20px;
-}
+        .links {
+            display: flex;
+            justify-content: space-around;
+            margin-bottom: 20px;
+        }
 
-.links .btn {
-    background-color: #9b51e0;
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    border-radius: 5px;
-    font-size: 16px;
-    text-decoration: none;
-    text-align: center;
-    display: flex;
-    align-items: center;
-    transition: background-color 0.3s;
-}
+        .links .btn {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            font-size: 1rem;
+            text-decoration: none;
+            text-align: center;
+            display: flex;
+            align-items: center;
+            transition: background-color 0.3s;
+        }
 
-.links .btn i {
-    margin-right: 8px;
-}
+        .links .btn i {
+            margin-right: 8px;
+            aria-hidden: true;
+        }
 
-.links .btn:hover {
-    background-color: #5a1374;
-}
+        .links .btn:hover {
+            background-color: var(--secondary-color);
+        }
 
-/* Tabla de Ventas */
-#ventas-panel {
-    margin-bottom: 40px;
-}
+        /* Tabla de Ventas */
+        #ventas-panel {
+            margin-bottom: 40px;
+        }
 
-#tabla-ventas {
-    width: 100%;
-    border-collapse: collapse;
-    margin-bottom: 20px;
-    overflow-x: auto; /* Permite el desplazamiento horizontal */
-}
+        #tabla-ventas {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+            overflow-x: auto;
+        }
 
-#tabla-ventas th,
-#tabla-ventas td {
-    border: 1px solid #ddd;
-    padding: 10px;
-    text-align: left;
-}
+        #tabla-ventas th,
+        #tabla-ventas td {
+            border: 1px solid #ddd;
+            padding: 10px;
+            text-align: left;
+        }
 
-#tabla-ventas th {
-    background-color: #9b51e0;
-    color: white;
-    text-align: left;
-    font-weight: normal;
-}
+        #tabla-ventas th {
+            background-color: var(--primary-color);
+            color: white;
+            text-align: left;
+            font-weight: normal;
+        }
 
-#tabla-ventas tr:nth-child(even) {
-    background-color: #f2f2f2;
-}
+        #tabla-ventas tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
 
-#tabla-ventas tr:hover {
-    background-color: #ddd;
-}
+        #tabla-ventas tr:hover {
+            background-color: #ddd;
+        }
 
-.estado-entregado {
-    width: 100%;
-    padding: 8px;
-    border-radius: 5px;
-    border: 1px solid #ccc;
-    background-color: #fff;
-}
+        .estado-entregado {
+            width: 100%;
+            padding: 8px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            background-color: #fff;
+        }
 
-/* Botón de Limpiar Datos */
-#limpiar-datos {
-    background-color: #dc3545;
-    border: none;
-    padding: 10px 20px;
-    border-radius: 5px;
-    color: white;
-    font-size: 16px;
-    cursor: pointer;
-    transition: background-color 0.3s;
-    display: flex;
-    align-items: center;
-}
+        /* Botón de Limpiar Datos */
+        #limpiar-datos {
+            background-color: #dc3545;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            color: white;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            display: flex;
+            align-items: center;
+        }
 
-#limpiar-datos i {
-    margin-right: 8px;
-}
+        #limpiar-datos i {
+            margin-right: 8px;
+            aria-hidden: true;
+        }
 
-#limpiar-datos:hover {
-    background-color: #c82333;
-}
+        #limpiar-datos:hover {
+            background-color: #c82333;
+        }
 
-/* Gráficos */
-#grafico-ventas {
-    display: flex;
-    flex-direction: column;
-}
+        /* Gráficos */
+        #grafico-ventas {
+            display: flex;
+            flex-direction: column;
+        }
 
-#grafico-ventas div {
-    margin-bottom: 40px;
-}
+        #grafico-ventas div {
+            margin-bottom: 40px;
+        }
 
-canvas {
-    width: 100% !important;
-    height: auto !important;
-}
+        canvas {
+            width: 100% !important;
+            height: auto !important;
+        }
 
-/* Footer */
-footer {
-    background-color: #333;
-    color: #fff;
-    text-align: center;
-    padding: 10px;
-    width: 100%;
-    box-sizing: border-box;
-}
+        /* Footer */
+        footer {
+            background-color: #333;
+            color: #fff;
+            text-align: center;
+            padding: 10px;
+            width: 100%;
+            box-sizing: border-box;
+        }
 
-footer p {
-    margin: 0;
-    font-size: 14px;
-}
+        footer p {
+            margin: 0;
+            font-size: 0.875rem;
+        }
 
-/* Media Queries */
-@media (max-width: 768px) {
-    header h1 {
-        font-size: 20px;
-    }
+        /* Media Queries */
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 1.25rem;
+            }
 
-    header .btn {
-        font-size: 14px;
-        padding: 8px 12px;
-    }
+            header .btn {
+                font-size: 0.875rem;
+                padding: 8px 12px;
+            }
 
-    .container {
-        padding: 15px;
-    }
+            main {
+                padding: 15px;
+            }
 
-    .links {
-        flex-direction: column;
-        align-items: center;
-    }
+            .links {
+                flex-direction: column;
+                align-items: center;
+            }
 
-    .links .btn {
-        margin-bottom: 10px;
-    }
+            .links .btn {
+                margin-bottom: 10px;
+            }
 
-    #tabla-ventas th,
-    #tabla-ventas td {
-        padding: 8px;
-    }
+            #tabla-ventas th,
+            #tabla-ventas td {
+                padding: 8px;
+            }
 
-    #ventas-panel h3 {
-        font-size: 16px;
-    }
+            #ventas-panel h3 {
+                font-size: 1rem;
+            }
 
-    #limpiar-datos {
-        font-size: 14px;
-        padding: 8px 15px;
-    }
-}
+            #limpiar-datos {
+                font-size: 0.875rem;
+                padding: 8px 15px;
+            }
+        }
 
-@media (max-width: 480px) {
-    header {
-        flex-direction: column;
-        align-items: flex-start;
-    }
+        @media (max-width: 480px) {
+            header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
 
-    header .logo {
-        width: 120px;
-    }
+            header .logo {
+                width: 120px;
+            }
 
-    header h1 {
-        font-size: 18px;
-        text-align: left;
-        margin-left: 10px;
-    }
+            header h1 {
+                font-size: 1.125rem;
+                text-align: left;
+                margin-left: 10px;
+            }
 
-    .links .btn {
-        font-size: 14px;
-        padding: 8px 10px;
-    }
+            .links .btn {
+                font-size: 0.875rem;
+                padding: 8px 10px;
+            }
 
-    #ventas-panel h2 {
-        font-size: 20px;
-    }
+            #ventas-panel h2 {
+                font-size: 1.25rem;
+            }
 
-    #ventas-panel h3 {
-        font-size: 14px;
-    }
+            #ventas-panel h3 {
+                font-size: 0.875rem;
+            }
 
-    #limpiar-datos {
-        font-size: 14px;
-        padding: 8px 10px;
-    }
-}
+            #limpiar-datos {
+                font-size: 0.875rem;
+                padding: 8px 10px;
+            }
+        }
     </style>
 </head>
 <body>
     <header>
-        <img src="images/logo.png" alt="Logo" class="logo">
+        <img src="images/logo.png" alt="Logo de la Empresa" class="logo">
         <h1>Administrador</h1>
-        <button id="cerrar-sesion" class="btn"><i class="fas fa-sign-out-alt"></i> Cerrar Sesión</button>
+        <button id="cerrar-sesion" class="btn" aria-label="Cerrar Sesión"><i class="fas fa-sign-out-alt"></i> Cerrar Sesión</button>
     </header>
-    <div class="container">
+    <main>
         <h2>Panel de Control</h2>
-        <div class="links">
-            <a href="#" class="btn"><i class="fas fa-user-plus"></i> Añadir Usuario</a>
-            <a href="#" class="btn"><i class="fas fa-chart-line"></i> Reportes</a>
-        </div>
-        <div id="ventas-panel">
+        <nav class="links">
+            <a href="#" class="btn" aria-label="Añadir Usuario"><i class="fas fa-user-plus"></i> Añadir Usuario</a>
+            <a href="#" class="btn" aria-label="Ver Reportes"><i class="fas fa-chart-line"></i> Reportes</a>
+        </nav>
+        <section id="ventas-panel">
             <h2>Ventas Registradas</h2>
             <div style="overflow-x: auto;">
                 <table id="tabla-ventas">
                     <thead>
                         <tr>
-                            <th><i class="fas fa-user"></i> Vendedor</th>
-                            <th><i class="fas fa-id-badge"></i> Perfil</th>
-                            <th><i class="fas fa-id-card"></i> ID Transacción</th>
-                            <th><i class="fas fa-dollar-sign"></i> Monto</th>
-                            <th><i class="fas fa-check-circle"></i> Entregado</th>
+                            <th><i class="fas fa-user" aria-hidden="true"></i> Vendedor</th>
+                            <th><i class="fas fa-id-badge" aria-hidden="true"></i> Perfil</th>
+                            <th><i class="fas fa-id-card" aria-hidden="true"></i> ID Transacción</th>
+                            <th><i class="fas fa-dollar-sign" aria-hidden="true"></i> Monto</th>
+                            <th><i class="fas fa-check
+<th><i class="fas fa-check" aria-hidden="true"></i> Estado</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <!-- Ejemplo de fila con opción de selección para "Entregado" -->
                         <tr>
                             <td>Juan Pérez</td>
                             <td>Vendedor</td>
-                            <td>12345</td>
-                            <td>$100.00</td>
+                            <td>#12345</td>
+                            <td>$500</td>
                             <td>
-                                <select class="estado-entregado">
-                                    <option value="si">Sí</option>
-                                    <option value="no">No</option>
+                                <select class="estado-entregado" aria-label="Seleccionar estado">
+                                    <option value="pendiente">Pendiente</option>
+                                    <option value="completado">Completado</option>
+                                    <option value="cancelado">Cancelado</option>
                                 </select>
                             </td>
                         </tr>
-                        <!-- Añadir más filas según sea necesario -->
+                        <!-- Más filas según sea necesario -->
                     </tbody>
                 </table>
             </div>
-            <h3>Total de Ventas: $<span id="total-ventas">0.00</span></h3>
-            <button id="limpiar-datos" class="btn"><i class="fas fa-trash-alt"></i> Eliminar Todos los Datos</button>
-        </div>
-        <div id="grafico-ventas">
-            <h2>Gráficos de Ventas</h2>
+            <button id="limpiar-datos" aria-label="Limpiar Datos"><i class="fas fa-trash-alt"></i> Limpiar Datos</button>
+        </section>
+
+        <section id="grafico-ventas">
+            <h2>Estadísticas de Ventas</h2>
             <div>
-                <canvas id="grafico-por-producto"></canvas>
+                <canvas id="grafico-ventas-canvas"></canvas>
             </div>
-            <div>
-                <canvas id="grafico-por-vendedor"></canvas>
-            </div>
-        </div>
-    </div>
+        </section>
+    </main>
+
     <footer>
-        <p>Powered by Duality Domain</p>
+        <p>&copy; 2024 Empresa. Todos los derechos reservados.</p>
     </footer>
-    <script src="js/admin.js"></script>
+
+    <script>
+        // Código para inicializar y mostrar gráficos usando Chart.js
+        const ctx = document.getElementById('grafico-ventas-canvas').getContext('2d');
+        const myChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo'],
+                datasets: [{
+                    label: 'Ventas en USD',
+                    data: [500, 700, 400, 600, 800],
+                    backgroundColor: 'rgba(155, 81, 224, 0.6)',
+                    borderColor: 'rgba(155, 81, 224, 1)',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+    </script>
 </body>
-</html> 
+</html>
