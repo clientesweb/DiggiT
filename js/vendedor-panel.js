@@ -5,7 +5,7 @@ document.addEventListener('DOMContentLoaded', () => {
         window.location.href = 'index.html'; // Redirigir a la página de inicio de sesión si no está autenticado
         return;
     }
-
+    
     // Mostrar el nombre del usuario y el avatar
     function mostrarUsuario() {
         const nombreUsuario = localStorage.getItem('nombreUsuario') || 'Usuario';
