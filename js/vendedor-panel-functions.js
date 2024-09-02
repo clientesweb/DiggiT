@@ -2,11 +2,13 @@ document.addEventListener('DOMContentLoaded', () => {
     const usuarioAutenticado = localStorage.getItem('vendedorAutenticado');
 
     if (!usuarioAutenticado) {
-        window.location.href = 'login.htm'; // Redirigir a la página de inicio de sesión si no está autenticado
+        window.location.href = 'login.html'; // Redirigir a la página de inicio de sesión si no está autenticado
         return;
     }
 
-    // Función para mostrar las ventas del vendedor
+    // Establecer el nombre del usuario
+    document.getElementById('nombre-usuario').textContent = usuarioAutenticado;
+
     function mostrarVentas(pagina = 1) {
         const ventas = JSON.parse(localStorage.getItem('ventas')) || [];
         const usuarioVentas = ventas.filter(v => v.vendedor === usuarioAutenticado);
@@ -45,55 +47,6 @@ document.addEventListener('DOMContentLoaded', () => {
         paginaAnterior.dataset.page = pagina - 1;
         paginaSiguiente.dataset.page = pagina + 1;
     }
-
-    // Función para agregar una nueva venta
-    document.getElementById('agregar-venta').addEventListener('click', () => {
-        const perfil = document.getElementById('perfil').value;
-        const numeroConfirmacion = document.getElementById('numero-confirmacion').value;
-        const monto = document.getElementById('monto').value;
-        const entregado = document.getElementById('entregado').value;
-
-        if (!usuarioAutenticado || !perfil || !numeroConfirmacion || !monto) {
-            mostrarNotificacion('error', 'Por favor, complete todos los campos.');
-            return;
-        }
-
-        const ventas = JSON.parse(localStorage.getItem('ventas')) || [];
-        ventas.push({
-            perfil,
-            numeroConfirmacion,
-            monto,
-            entregado,
-            vendedor: usuarioAutenticado
-        });
-        localStorage.setItem('ventas', JSON.stringify(ventas));
-
-        // Limpiar campos del formulario
-        document.getElementById('perfil').value = '';
-        document.getElementById('numero-confirmacion').value = '';
-        document.getElementById('monto').value = '';
-        document.getElementById('entregado').value = 'sí';
-
-        mostrarVentas();
-        mostrarNotificacion('success', 'Venta agregada exitosamente.');
-    });
-
-    // Función para mostrar notificaciones
-    function mostrarNotificacion(tipo, mensaje) {
-        const notificacion = document.getElementById('notificacion');
-        notificacion.className = `notificacion ${tipo}`;
-        notificacion.textContent = mensaje;
-        notificacion.style.display = 'block';
-        setTimeout(() => {
-            notificacion.style.display = 'none';
-        }, 5000);
-    }
-
-    // Función para cerrar sesión
-    document.getElementById('cerrar-sesion').addEventListener('click', () => {
-        localStorage.removeItem('vendedorAutenticado');
-        window.location.href = 'login.html'; // Redirigir a la página de inicio de sesión
-    });
 
     // Función para manejar el cambio de página en la paginación
     document.querySelectorAll('.pagination-button').forEach(button => {
