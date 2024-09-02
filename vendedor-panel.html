@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Panel del Vendedor</title>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Mulish:wght@400;600&display=swap">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
     <style>
         /* Estilos generales para el cuerpo */
         body {
@@ -50,6 +51,9 @@
             font-size: 16px;
             cursor: pointer;
             transition: background-color 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 5px;
         }
 
         button:hover {
@@ -141,6 +145,7 @@
             padding: 10px;
             width: 100%;
             box-sizing: border-box;
+            margin-top: auto;
         }
 
         footer p {
@@ -148,7 +153,7 @@
             font-size: 14px;
         }
 
-        /* Media Queries para hacer la p·gina responsiva */
+        /* Media Queries para hacer la p√°gina responsiva */
         @media (max-width: 768px) {
             header h1 {
                 font-size: 20px;
@@ -181,7 +186,7 @@
     <header>
         <img src="images/logo.png" alt="Logo">
         <h1>Panel del Vendedor</h1>
-        <button id="cerrar-sesion" aria-label="Cerrar sesion"><i class="fas fa-sign-out-alt"></i> Cerrar Sesion</button>
+        <button id="cerrar-sesion" aria-label="Cerrar sesion"><i class="fas fa-sign-out-alt"></i> Cerrar Sesi√≥n</button>
     </header>
     <div class="container">
         <h2>Mis Ventas</h2>
@@ -197,7 +202,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <!-- Las ventas del vendedor se aÒadir·n aquÌ -->
+                    <!-- Las ventas del vendedor se a√±adir√°n aqu√≠ -->
                 </tbody>
             </table>
             <h4>Total de Ventas: $<span id="total-ventas">0.00</span></h4>
@@ -206,13 +211,13 @@
             <h3>Cargar Nueva Venta</h3>
             <label for="perfil">Perfil:</label>
             <input type="text" id="perfil" required aria-label="Perfil"><br>
-            <label for="numero-confirmacion">ID Transaccion:</label>
-            <input type="text" id="numero-confirmacion" required aria-label="ID TransacciÛn"><br>
+            <label for="numero-confirmacion">ID Transacci√≥n:</label>
+            <input type="text" id="numero-confirmacion" required aria-label="ID Transacci√≥n"><br>
             <label for="monto">Monto:</label>
             <input type="number" id="monto" step="0.01" required aria-label="Monto"><br>
             <label for="entregado">Entregado:</label>
             <select id="entregado" aria-label="Entregado">
-                <option value="si">Si</option>
+                <option value="si">S√≠</option>
                 <option value="no">No</option>
             </select><br>
             <button id="agregar-venta">Agregar Venta</button>
@@ -222,7 +227,7 @@
     <footer>
         <p>Powered by Duality Domain</p>
     </footer>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/js/all.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/js/all.min.js"></script>
     <script src="js/vendedor-panel.js"></script>
 </body>
 </html>
