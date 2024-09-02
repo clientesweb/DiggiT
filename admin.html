@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Mulish:wght@400;600&display=swap">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
-        /* Estilos generales para el cuerpo */
+        /* General */
 body {
     font-family: 'Mulish', sans-serif;
     background-color: #761c9e;
@@ -21,7 +21,7 @@ body {
     box-sizing: border-box;
 }
 
-/* Estilo del encabezado */
+/* Header */
 header {
     background-color: #9b51e0;
     color: white;
@@ -34,6 +34,7 @@ header {
     position: sticky;
     top: 0;
     box-sizing: border-box;
+    z-index: 1000; /* Asegura que el header esté siempre visible sobre otros elementos */
 }
 
 header .logo {
@@ -62,7 +63,7 @@ header .btn:hover {
     background-color: #5a1374;
 }
 
-/* Estilo del contenedor principal */
+/* Contenedor Principal */
 .container {
     width: 90%;
     max-width: 1200px;
@@ -108,7 +109,7 @@ h2 {
     background-color: #5a1374;
 }
 
-/* Estilo de la tabla de ventas */
+/* Tabla de Ventas */
 #ventas-panel {
     margin-bottom: 40px;
 }
@@ -150,7 +151,7 @@ h2 {
     background-color: #fff;
 }
 
-/* Estilo del botón de limpiar datos */
+/* Botón de Limpiar Datos */
 #limpiar-datos {
     background-color: #dc3545;
     border: none;
@@ -172,7 +173,7 @@ h2 {
     background-color: #c82333;
 }
 
-/* Estilo para los gráficos */
+/* Gráficos */
 #grafico-ventas {
     display: flex;
     flex-direction: column;
@@ -187,7 +188,7 @@ canvas {
     height: auto !important;
 }
 
-/* Estilo del footer */
+/* Footer */
 footer {
     background-color: #333;
     color: #fff;
@@ -202,7 +203,7 @@ footer p {
     font-size: 14px;
 }
 
-/* Media Queries para hacer la página responsiva */
+/* Media Queries */
 @media (max-width: 768px) {
     header h1 {
         font-size: 20px;
