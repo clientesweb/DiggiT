@@ -14,14 +14,15 @@
         <h1>Panel de Administración</h1>
     </header>
     <div class="login-container">
-        <h2>Admin Login</h2>
-        <label for="usuario-admin"><i class="fas fa-user"></i> Usuario:</label>
-        <input type="text" id="usuario-admin" placeholder="Usuario" required>
-        <label for="contrasena-admin"><i class="fas fa-lock"></i> Contraseña:</label>
-        <input type="password" id="contrasena-admin" placeholder="Contraseña" required>
-        <button id="iniciar-sesion-admin">Iniciar Sesión</button>
+    <form id="login-form">
+        <label for="usuario-admin">Usuario:</label>
+        <input type="text" id="usuario-admin" required>
+        <label for="contrasena-admin">Contraseña:</label>
+        <input type="password" id="contrasena-admin" required>
+        <button type="button" id="iniciar-sesion-admin">Iniciar Sesión</button>
         <p id="mensaje-error-admin" class="error-message"></p>
-    </div>
+    </form>
+</div>
     <footer>
         <p>Powered by Duality Domain</p>
     </footer>
