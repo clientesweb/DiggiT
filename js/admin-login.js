@@ -13,7 +13,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // Aquí debes implementar la lógica de autenticación real.
         // Ejemplo básico:
-        if (usuario === 'admin' && contrasena === 'admin123') {
+        if (usuario === '' && contrasena === '') {
             // Redirigir a la página del panel de administrador
             window.location.href = 'admin.html';
         } else {
