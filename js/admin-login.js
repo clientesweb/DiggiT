@@ -2,7 +2,10 @@ document.addEventListener('DOMContentLoaded', () => {
     const botonIniciarSesion = document.getElementById('iniciar-sesion-admin');
     const mensajeError = document.getElementById('mensaje-error-admin');
     
-    botonIniciarSesion.addEventListener('click', () => {
+    botonIniciarSesion.addEventListener('click', (event) => {
+        // Prevenir el comportamiento por defecto del botón (enviar formulario)
+        event.preventDefault();
+        
         const usuario = document.getElementById('usuario-admin').value.trim();
         const contrasena = document.getElementById('contrasena-admin').value.trim();
 
