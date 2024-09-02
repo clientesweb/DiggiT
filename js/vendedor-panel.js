@@ -6,8 +6,9 @@ document.addEventListener('DOMContentLoaded', () => {
         return;
     }
 
+    // Mostrar el nombre del usuario en el panel
     const usuarioNombreElement = document.getElementById('usuario-nombre');
-    usuarioNombreElement.textContent = usuarioAutenticado; // Nombre de usuario en el panel
+    usuarioNombreElement.textContent = usuarioAutenticado;
 
     // Función para mostrar las ventas del vendedor
     function mostrarVentas(pagina = 1, porPagina = 10) {
