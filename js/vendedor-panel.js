@@ -2,7 +2,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const usuarioAutenticado = localStorage.getItem('vendedorAutenticado');
     
     if (!usuarioAutenticado) {
-        window.location.href = 'index.html'; // Redirigir a la página de inicio de sesión si no está autenticado
+        window.location.href = 'login.html'; // Redirigir a la página de inicio de sesión si no está autenticado
         return;
     }
     
