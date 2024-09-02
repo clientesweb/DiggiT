@@ -276,6 +276,42 @@ footer p {
         padding: 8px 10px;
     }
 }
+/* Estilos para el menú de navegación lateral */
+.sidebar {
+    background-color: #5a1374;
+    color: white;
+    width: 200px;
+    height: 100vh;
+    position: fixed;
+    top: 60px; /* Altura del header */
+    left: 0;
+    padding-top: 20px;
+    box-sizing: border-box;
+}
+
+.sidebar ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.sidebar ul li {
+    padding: 10px 20px;
+}
+
+.sidebar ul li a {
+    color: white;
+    text-decoration: none;
+    display: block;
+    transition: background-color 0.3s;
+}
+
+.sidebar ul li a:hover {
+    background-color: #9b51e0;
+}
+
+.container {
+    margin-left: 220px; /* Espacio para el menú de navegación */
+}
     </style>
 </head>
 <body>
@@ -284,6 +320,15 @@ footer p {
         <h1>Administrador</h1>
         <button id="cerrar-sesion" class="btn"><i class="fas fa-sign-out-alt"></i> Cerrar Sesión</button>
     </header>
+    <!-- Menú de navegación lateral -->
+    <nav class="sidebar">
+        <ul>
+            <li><a href="#"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
+            <li><a href="#"><i class="fas fa-users"></i> Usuarios</a></li>
+            <li><a href="#"><i class="fas fa-chart-line"></i> Reportes</a></li>
+            <li><a href="#"><i class="fas fa-cogs"></i> Configuración</a></li>
+        </ul>
+    </nav>
     <div class="container">
         <h2>Panel de Control</h2>
         <div class="links">
@@ -325,18 +370,22 @@ footer p {
             <button id="limpiar-datos" class="btn"><i class="fas fa-trash-alt"></i> Eliminar Todos los Datos</button>
         </div>
         <div id="grafico-ventas">
-            <h2>Gráficos de Ventas</h2>
-            <div>
-                <canvas id="grafico-por-producto"></canvas>
-            </div>
-            <div>
-                <canvas id="grafico-por-vendedor"></canvas>
-            </div>
-        </div>
+    <h2>Gráficos de Ventas</h2>
+    <div>
+        <canvas id="grafico-por-producto"></canvas>
     </div>
+    <div>
+        <canvas id="grafico-por-vendedor"></canvas>
+    </div>
+    <!-- Nuevo gráfico de barras -->
+    <div>
+        <canvas id="grafico-ingresos-mensuales"></canvas>
+    </div>
+</div>
     <footer>
         <p>Powered by Duality Domain</p>
     </footer>
     <script src="js/admin.js"></script>
 </body>
 </html> 
+
