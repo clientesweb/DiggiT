@@ -1,50 +1,77 @@
+/* General */
 body {
-    font-family: Arial, sans-serif;
-    background-color: #f0f0f0;
+    font-family: 'Mulish', sans-serif;
+    background-color: #f0f2f5;
     margin: 0;
     display: flex;
-    flex-direction: column;
-    justify-content: center;
     align-items: center;
+    justify-content: center;
     min-height: 100vh;
+    box-sizing: border-box;
 }
 
+/* Contenedor de login */
 .login-container {
-    background-color: #fff;
+    background-color: #ffffff;
     padding: 30px;
     border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    width: 350px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 400px;
+}
+
+/* Header */
+header {
     text-align: center;
-    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+header .logo {
+    width: 120px;
+}
+
+header h1 {
+    font-size: 24px;
+    color: #333;
+    margin: 10px 0 0;
+}
+
+/* Formulario de login */
+.login-form {
+    display: flex;
+    flex-direction: column;
+}
+
+.login-form h2 {
+    font-size: 20px;
+    color: #333;
+    margin-bottom: 20px;
+    text-align: center;
 }
 
 .login-form label {
-    display: block;
-    text-align: left;
-    margin: 15px 0 5px;
-    font-weight: bold;
-    color: #333;
+    font-size: 14px;
+    color: #666;
+    margin-bottom: 5px;
 }
 
 .login-form input {
-    width: 100%;
-    padding: 10px;
-    margin-bottom: 15px;
+    padding: 12px;
     border: 1px solid #ddd;
     border-radius: 5px;
-    font-size: 1em;
+    margin-bottom: 15px;
+    font-size: 16px;
+    color: #333;
 }
 
 .login-form button {
-    width: 100%;
-    padding: 10px;
     background-color: #007bff;
     color: white;
     border: none;
+    padding: 12px;
     border-radius: 5px;
+    font-size: 16px;
     cursor: pointer;
-    font-size: 1em;
     transition: background-color 0.3s;
 }
 
@@ -53,16 +80,35 @@ body {
 }
 
 .error-message {
-    color: red;
-    font-size: 0.9em;
+    color: #dc3545;
+    font-size: 14px;
+    margin-bottom: 15px;
+    text-align: center;
 }
 
+/* Footer */
 footer {
-    width: 100%;
+    background-color: #333;
+    color: #fff;
     text-align: center;
     padding: 10px;
+    width: 100%;
+    box-sizing: border-box;
     position: absolute;
     bottom: 0;
-    background-color: #fff;
-    box-shadow: 0 -1px 5px rgba(0, 0, 0, 0.1);
+}
+
+footer p {
+    margin: 0;
+    font-size: 14px;
+}
+
+/* Enlaces */
+a {
+    color: #007bff;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
 }
