@@ -9,86 +9,126 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
     <style>
         body {
-            font-family: 'Mulish', Arial, sans-serif;
-            background-color: #f0f0f0;
-            margin: 0;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-        }
+    font-family: 'Mulish', Arial, sans-serif;
+    background-color: #f0f0f0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
 
-        .login-container {
-            background-color: #fff;
-            padding: 30px;
-            border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            width: 350px;
-            text-align: center;
-            margin-top: 20px;
-        }
+header {
+    background-color: #007bff;
+    color: white;
+    width: 100%;
+    padding: 10px 0;
+    text-align: center;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    position: fixed;
+    top: 0;
+}
 
-        .login-container label {
-            display: block;
-            text-align: left;
-            margin: 15px 0 5px;
-            font-weight: bold;
-            color: #333;
-        }
+header img {
+    width: 40px;
+    height: auto;
+    vertical-align: middle;
+    margin-right: 10px;
+}
 
-        .login-container .input-container {
-            position: relative;
-            width: 100%;
-        }
+header h1 {
+    display: inline;
+    font-size: 24px;
+    vertical-align: middle;
+}
 
-        .login-container .input-container i {
-            position: absolute;
-            left: 10px;
-            top: 50%;
-            transform: translateY(-50%);
-            color: #007bff;
-        }
+.login-container {
+    background-color: #fff;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: 350px;
+    text-align: center;
+    margin-top: 70px; /* Para dar espacio al header */
+}
 
-        .login-container input {
-            width: 100%;
-            padding: 10px 10px 10px 30px; /* Espacio para el icono */
-            margin-bottom: 15px;
-            border: 1px solid #ddd;
-            border-radius: 5px;
-            font-size: 1em;
-        }
+.login-container label {
+    display: block;
+    text-align: left;
+    margin: 15px 0 5px;
+    font-weight: bold;
+    color: #333;
+}
 
-        .login-container button {
-            width: 100%;
-            padding: 10px;
-            background-color: #007bff;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 1em;
-            transition: background-color 0.3s;
-        }
+.login-container .input-container {
+    position: relative;
+    width: 100%;
+}
 
-        .login-container button:hover {
-            background-color: #0056b3;
-        }
+.login-container .input-container i {
+    position: absolute;
+    left: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #007bff;
+}
 
-        .error-message {
-            color: red;
-            font-size: 0.9em;
-        }
+.login-container input {
+    width: 100%;
+    padding: 10px 10px 10px 35px; /* Ajuste para iconos */
+    margin-bottom: 15px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 1em;
+    box-sizing: border-box;
+}
 
-        footer {
-            width: 100%;
-            text-align: center;
-            padding: 10px;
-            position: absolute;
-            bottom: 0;
-            background-color: #fff;
-            box-shadow: 0 -1px 5px rgba(0, 0, 0, 0.1);
-        }
+.login-container button {
+    width: 100%;
+    padding: 10px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1em;
+    transition: background-color 0.3s;
+}
+
+.login-container button:hover {
+    background-color: #0056b3;
+}
+
+.error-message {
+    color: red;
+    font-size: 0.9em;
+}
+
+.login-container a {
+    color: #007bff;
+    text-decoration: none;
+    font-size: 0.9em;
+}
+
+.login-container a:hover {
+    text-decoration: underline;
+}
+
+footer {
+    width: 100%;
+    text-align: center;
+    padding: 10px;
+    position: fixed;
+    bottom: 0;
+    background-color: #fff;
+    box-shadow: 0 -1px 5px rgba(0, 0, 0, 0.1);
+}
+
+footer p {
+    margin: 0;
+    font-size: 0.9em;
+}
     </style>
 </head>
 <body>
