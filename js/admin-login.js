@@ -15,7 +15,7 @@ document.addEventListener('DOMContentLoaded', () => {
         // Ejemplo básico:
         if (usuario === 'admin' && contrasena === 'admin123') {
             // Redirigir a la página del panel de administrador
-            window.location.href = 'admin-panel.html';
+            window.location.href = 'admin.html';
         } else {
             mensajeError.textContent = 'Usuario o contraseña incorrectos.';
         }
