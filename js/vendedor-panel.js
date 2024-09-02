@@ -5,37 +5,59 @@ document.addEventListener('DOMContentLoaded', () => {
         window.location.href = 'index.html'; // Redirigir a la página de inicio de sesión si no está autenticado
         return;
     }
+    
+    // Mostrar el nombre del usuario y el avatar
+    function mostrarUsuario() {
+        const nombreUsuario = localStorage.getItem('nombreUsuario') || 'Usuario';
+        document.getElementById('nombre-usuario').textContent = nombreUsuario;
+        document.getElementById('avatar-usuario').classList.add('fa', 'fa-user'); // Puedes cambiar el icono si lo deseas
+    }
 
-    // Mostrar el nombre del usuario en el panel
-    const usuarioNombreElement = document.getElementById('usuario-nombre');
-    usuarioNombreElement.textContent = usuarioAutenticado;
-
-    // Función para mostrar las ventas del vendedor
-    function mostrarVentas(pagina = 1, porPagina = 10) {
+    // Función para mostrar las ventas del vendedor con paginación, filtros y búsqueda
+    function mostrarVentas(pagina = 1, filtro = '', busqueda = '') {
         const ventas = JSON.parse(localStorage.getItem('ventas')) || [];
         const usuarioVentas = ventas.filter(v => v.vendedor === usuarioAutenticado);
+        
+        // Aplicar filtro y búsqueda
+        const ventasFiltradas = usuarioVentas.filter(v =>
+            v.perfil.toLowerCase().includes(busqueda.toLowerCase())
+        ).filter(v =>
+            filtro === '' || v.entregado === filtro
+        );
+
+        // Implementar paginación
+        const itemsPorPagina = 5;
+        const totalPaginas = Math.ceil(ventasFiltradas.length / itemsPorPagina);
+        const ventasPaginas = ventasFiltradas.slice((pagina - 1) * itemsPorPagina, pagina * itemsPorPagina);
 
         const tablaVentas = document.getElementById('tabla-ventas').getElementsByTagName('tbody')[0];
         tablaVentas.innerHTML = ''; // Limpiar tabla antes de volver a cargar
 
-        const totalVentas = usuarioVentas.reduce((total, venta) => total + parseFloat(venta.monto), 0);
-        document.getElementById('total-ventas').textContent = totalVentas.toFixed(2);
-
-        const inicio = (pagina - 1) * porPagina;
-        const fin = inicio + porPagina;
-        const ventasPagina = usuarioVentas.slice(inicio, fin);
-
-        ventasPagina.forEach(venta => {
+        let totalVentas = 0;
+        ventasPaginas.forEach(venta => {
             const fila = tablaVentas.insertRow();
             fila.insertCell(0).textContent = venta.perfil;
             fila.insertCell(1).textContent = venta.numeroConfirmacion;
             fila.insertCell(2).textContent = `$${parseFloat(venta.monto).toFixed(2)}`;
             fila.insertCell(3).textContent = venta.entregado;
+            totalVentas += parseFloat(venta.monto);
         });
-        
+
+        document.getElementById('total-ventas').textContent = totalVentas.toFixed(2);
+
         // Actualizar paginación
-        document.getElementById('pagina-anterior').disabled = pagina <= 1;
-        document.getElementById('pagina-siguiente').disabled = pagina >= Math.ceil(usuarioVentas.length / porPagina);
+        const paginacion = document.getElementById('paginacion');
+        paginacion.innerHTML = '';
+        for (let i = 1; i <= totalPaginas; i++) {
+            const boton = document.createElement('button');
+            boton.textContent = i;
+            boton.classList.add('pagination-button');
+            if (i === pagina) {
+                boton.classList.add('active');
+            }
+            boton.addEventListener('click', () => mostrarVentas(i, filtro, busqueda));
+            paginacion.appendChild(boton);
+        }
     }
 
     // Función para agregar una nueva venta
@@ -45,8 +67,8 @@ document.addEventListener('DOMContentLoaded', () => {
         const monto = document.getElementById('monto').value;
         const entregado = document.getElementById('entregado').value;
 
-        if (!perfil || !numeroConfirmacion || !monto) {
-            mostrarNotificacion('Por favor, complete todos los campos.', 'error');
+        if (!usuarioAutenticado || !perfil || !numeroConfirmacion || !monto) {
+            document.getElementById('mensaje-error').textContent = 'Por favor, complete todos los campos.';
             return;
         }
 
@@ -66,7 +88,7 @@ document.addEventListener('DOMContentLoaded', () => {
         document.getElementById('monto').value = '';
         document.getElementById('entregado').value = 'sí';
 
-        mostrarVentas(); // Actualizar la lista de ventas
+        mostrarVentas();
     });
 
     // Función para cerrar sesión
@@ -75,66 +97,18 @@ document.addEventListener('DOMContentLoaded', () => {
         window.location.href = 'login.html'; // Redirigir a la página de inicio de sesión
     });
 
-    // Función para mostrar notificaciones
-    function mostrarNotificacion(mensaje, tipo) {
-        const notificaciones = document.getElementById('notificaciones');
-        const notificacion = document.createElement('div');
-        notificacion.className = `notificacion ${tipo}`;
-        notificacion.textContent = mensaje;
-        notificaciones.appendChild(notificacion);
-        setTimeout(() => notificaciones.removeChild(notificacion), 5000); // Ocultar después de 5 segundos
-    }
-
-    // Función para manejar la búsqueda y filtros
-    document.getElementById('filtro-busqueda').addEventListener('input', (e) => {
-        const valorBusqueda = e.target.value.toLowerCase();
-        const ventas = JSON.parse(localStorage.getItem('ventas')) || [];
-        const usuarioVentas = ventas.filter(v => v.vendedor === usuarioAutenticado);
-        const ventasFiltradas = usuarioVentas.filter(venta => 
-            venta.perfil.toLowerCase().includes(valorBusqueda) ||
-            venta.numeroConfirmacion.toLowerCase().includes(valorBusqueda)
-        );
-        mostrarVentasFiltradas(ventasFiltradas);
+    // Función para aplicar filtros
+    document.getElementById('filtro-entregado').addEventListener('change', () => {
+        const filtro = document.getElementById('filtro-entregado').value;
+        mostrarVentas(1, filtro, document.getElementById('busqueda').value);
     });
 
-    // Función para actualizar la tabla con ventas filtradas
-    function mostrarVentasFiltradas(ventasFiltradas, pagina = 1, porPagina = 10) {
-        const tablaVentas = document.getElementById('tabla-ventas').getElementsByTagName('tbody')[0];
-        tablaVentas.innerHTML = ''; // Limpiar tabla antes de volver a cargar
-
-        const totalVentas = ventasFiltradas.reduce((total, venta) => total + parseFloat(venta.monto), 0);
-        document.getElementById('total-ventas').textContent = totalVentas.toFixed(2);
-
-        const inicio = (pagina - 1) * porPagina;
-        const fin = inicio + porPagina;
-        const ventasPagina = ventasFiltradas.slice(inicio, fin);
-
-        ventasPagina.forEach(venta => {
-            const fila = tablaVentas.insertRow();
-            fila.insertCell(0).textContent = venta.perfil;
-            fila.insertCell(1).textContent = venta.numeroConfirmacion;
-            fila.insertCell(2).textContent = `$${parseFloat(venta.monto).toFixed(2)}`;
-            fila.insertCell(3).textContent = venta.entregado;
-        });
-
-        // Actualizar paginación
-        document.getElementById('pagina-anterior').disabled = pagina <= 1;
-        document.getElementById('pagina-siguiente').disabled = pagina >= Math.ceil(ventasFiltradas.length / porPagina);
-    }
-
-    // Función para manejar la paginación
-    let paginaActual = 1;
-    document.getElementById('pagina-anterior').addEventListener('click', () => {
-        if (paginaActual > 1) {
-            paginaActual--;
-            mostrarVentas(paginaActual);
-        }
-    });
-    document.getElementById('pagina-siguiente').addEventListener('click', () => {
-        paginaActual++;
-        mostrarVentas(paginaActual);
+    // Función para buscar ventas
+    document.getElementById('busqueda').addEventListener('input', () => {
+        mostrarVentas(1, document.getElementById('filtro-entregado').value, document.getElementById('busqueda').value);
     });
 
-    // Inicialización
+    // Mostrar ventas y usuario al cargar la página
     mostrarVentas();
+    mostrarUsuario();
 });
