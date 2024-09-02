@@ -2,40 +2,50 @@ document.addEventListener('DOMContentLoaded', () => {
     const usuarioAutenticado = localStorage.getItem('vendedorAutenticado');
     
     if (!usuarioAutenticado) {
-        window.location.href = 'index.html'; // Redirigir a la p·gina de inicio de sesiÛn si no est· autenticado
+        window.location.href = 'index.html'; // Redirigir a la p√°gina de inicio de sesi√≥n si no est√° autenticado
         return;
     }
-    
-    // FunciÛn para mostrar las ventas del vendedor
-    function mostrarVentas() {
+
+    const usuarioNombreElement = document.getElementById('usuario-nombre');
+    usuarioNombreElement.textContent = usuarioAutenticado; // Nombre de usuario en el panel
+
+    // Funci√≥n para mostrar las ventas del vendedor
+    function mostrarVentas(pagina = 1, porPagina = 10) {
         const ventas = JSON.parse(localStorage.getItem('ventas')) || [];
         const usuarioVentas = ventas.filter(v => v.vendedor === usuarioAutenticado);
-        
+
         const tablaVentas = document.getElementById('tabla-ventas').getElementsByTagName('tbody')[0];
         tablaVentas.innerHTML = ''; // Limpiar tabla antes de volver a cargar
 
-        let totalVentas = 0;
-        usuarioVentas.forEach(venta => {
+        const totalVentas = usuarioVentas.reduce((total, venta) => total + parseFloat(venta.monto), 0);
+        document.getElementById('total-ventas').textContent = totalVentas.toFixed(2);
+
+        const inicio = (pagina - 1) * porPagina;
+        const fin = inicio + porPagina;
+        const ventasPagina = usuarioVentas.slice(inicio, fin);
+
+        ventasPagina.forEach(venta => {
             const fila = tablaVentas.insertRow();
             fila.insertCell(0).textContent = venta.perfil;
             fila.insertCell(1).textContent = venta.numeroConfirmacion;
             fila.insertCell(2).textContent = `$${parseFloat(venta.monto).toFixed(2)}`;
             fila.insertCell(3).textContent = venta.entregado;
-            totalVentas += parseFloat(venta.monto);
         });
-
-        document.getElementById('total-ventas').textContent = totalVentas.toFixed(2);
+        
+        // Actualizar paginaci√≥n
+        document.getElementById('pagina-anterior').disabled = pagina <= 1;
+        document.getElementById('pagina-siguiente').disabled = pagina >= Math.ceil(usuarioVentas.length / porPagina);
     }
 
-    // FunciÛn para agregar una nueva venta
+    // Funci√≥n para agregar una nueva venta
     document.getElementById('agregar-venta').addEventListener('click', () => {
         const perfil = document.getElementById('perfil').value;
         const numeroConfirmacion = document.getElementById('numero-confirmacion').value;
         const monto = document.getElementById('monto').value;
         const entregado = document.getElementById('entregado').value;
 
-        if (!usuarioAutenticado || !perfil || !numeroConfirmacion || !monto) {
-            document.getElementById('mensaje-error').textContent = 'Por favor, complete todos los campos.';
+        if (!perfil || !numeroConfirmacion || !monto) {
+            mostrarNotificacion('Por favor, complete todos los campos.', 'error');
             return;
         }
 
@@ -53,17 +63,77 @@ document.addEventListener('DOMContentLoaded', () => {
         document.getElementById('perfil').value = '';
         document.getElementById('numero-confirmacion').value = '';
         document.getElementById('monto').value = '';
-        document.getElementById('entregado').value = 'sÌ';
+        document.getElementById('entregado').value = 's√≠';
 
-        mostrarVentas();
+        mostrarVentas(); // Actualizar la lista de ventas
     });
 
-    // FunciÛn para cerrar sesiÛn
+    // Funci√≥n para cerrar sesi√≥n
     document.getElementById('cerrar-sesion').addEventListener('click', () => {
         localStorage.removeItem('vendedorAutenticado');
-        window.location.href = 'login.html'; // Redirigir a la p·gina de inicio de sesiÛn
+        window.location.href = 'login.html'; // Redirigir a la p√°gina de inicio de sesi√≥n
     });
 
-    // Mostrar ventas al cargar la p·gina
+    // Funci√≥n para mostrar notificaciones
+    function mostrarNotificacion(mensaje, tipo) {
+        const notificaciones = document.getElementById('notificaciones');
+        const notificacion = document.createElement('div');
+        notificacion.className = `notificacion ${tipo}`;
+        notificacion.textContent = mensaje;
+        notificaciones.appendChild(notificacion);
+        setTimeout(() => notificaciones.removeChild(notificacion), 5000); // Ocultar despu√©s de 5 segundos
+    }
+
+    // Funci√≥n para manejar la b√∫squeda y filtros
+    document.getElementById('filtro-busqueda').addEventListener('input', (e) => {
+        const valorBusqueda = e.target.value.toLowerCase();
+        const ventas = JSON.parse(localStorage.getItem('ventas')) || [];
+        const usuarioVentas = ventas.filter(v => v.vendedor === usuarioAutenticado);
+        const ventasFiltradas = usuarioVentas.filter(venta => 
+            venta.perfil.toLowerCase().includes(valorBusqueda) ||
+            venta.numeroConfirmacion.toLowerCase().includes(valorBusqueda)
+        );
+        mostrarVentasFiltradas(ventasFiltradas);
+    });
+
+    // Funci√≥n para actualizar la tabla con ventas filtradas
+    function mostrarVentasFiltradas(ventasFiltradas, pagina = 1, porPagina = 10) {
+        const tablaVentas = document.getElementById('tabla-ventas').getElementsByTagName('tbody')[0];
+        tablaVentas.innerHTML = ''; // Limpiar tabla antes de volver a cargar
+
+        const totalVentas = ventasFiltradas.reduce((total, venta) => total + parseFloat(venta.monto), 0);
+        document.getElementById('total-ventas').textContent = totalVentas.toFixed(2);
+
+        const inicio = (pagina - 1) * porPagina;
+        const fin = inicio + porPagina;
+        const ventasPagina = ventasFiltradas.slice(inicio, fin);
+
+        ventasPagina.forEach(venta => {
+            const fila = tablaVentas.insertRow();
+            fila.insertCell(0).textContent = venta.perfil;
+            fila.insertCell(1).textContent = venta.numeroConfirmacion;
+            fila.insertCell(2).textContent = `$${parseFloat(venta.monto).toFixed(2)}`;
+            fila.insertCell(3).textContent = venta.entregado;
+        });
+
+        // Actualizar paginaci√≥n
+        document.getElementById('pagina-anterior').disabled = pagina <= 1;
+        document.getElementById('pagina-siguiente').disabled = pagina >= Math.ceil(ventasFiltradas.length / porPagina);
+    }
+
+    // Funci√≥n para manejar la paginaci√≥n
+    let paginaActual = 1;
+    document.getElementById('pagina-anterior').addEventListener('click', () => {
+        if (paginaActual > 1) {
+            paginaActual--;
+            mostrarVentas(paginaActual);
+        }
+    });
+    document.getElementById('pagina-siguiente').addEventListener('click', () => {
+        paginaActual++;
+        mostrarVentas(paginaActual);
+    });
+
+    // Inicializaci√≥n
     mostrarVentas();
 });
